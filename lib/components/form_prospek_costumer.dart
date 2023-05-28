@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
-class FormReserv extends StatefulWidget {
-  const FormReserv({super.key});
+class formProspekCostumer extends StatefulWidget {
+  const formProspekCostumer({super.key});
 
   @override
-  State<FormReserv> createState() => _FormReservState();
+  State<formProspekCostumer> createState() => _formProspekCostumerState();
 }
 
-class _FormReservState extends State<FormReserv> {
+class _formProspekCostumerState extends State<formProspekCostumer> {
   final _formState = GlobalKey<FormState>();
   final textController = TextEditingController();
+  late DateTime selectedDate = DateTime.now();
+
   angka? selectedValue;
   List<angka> angkas = [
     angka(id: 1, name: "SATU"),
@@ -22,11 +25,33 @@ class _FormReservState extends State<FormReserv> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        // appBar: AppBar(
-        //   title: Text('Flutter'),
-        // ),
         backgroundColor: Colors.white,
-        body: SingleChildScrollView(
+        body:
+            // Column(
+            //   children: [
+            //     Expanded(
+            //       child: Container(
+            //         padding: EdgeInsets.all(15),
+            //         child: Row(
+            //           mainAxisAlignment: MainAxisAlignment.spaceAround,
+            //           children: [
+            //             ElevatedButton(
+            //               onPressed: () {
+            //                 // Aksi ketika tombol pertama ditekan
+            //               },
+            //               child: Text('Tombol 1'),
+            //             ),
+            //             ElevatedButton(
+            //               onPressed: () {
+            //                 // Aksi ketika tombol kedua ditekan
+            //               },
+            //               child: Text('Tombol 2'),
+            //             ),
+            //           ],
+            //         ),
+            //       ),
+            //     ),
+            SingleChildScrollView(
           child: Container(
             // Atur warna latar belakang header sesuai kebutuhan Anda
 
@@ -35,7 +60,7 @@ class _FormReservState extends State<FormReserv> {
             child: Column(children: [
               AppBar(
                 title: Text(
-                  'Formulir',
+                  'Data Baru',
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
@@ -45,25 +70,72 @@ class _FormReservState extends State<FormReserv> {
                 centerTitle: true,
               ),
               SizedBox(height: 10),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 10.0),
-                child: Text(
-                  'Data Unit', // Label di atas kotak dropdown
-                  style: TextStyle(
-                    color: Colors.blue,
-                    fontWeight: FontWeight.bold,
+              Row(
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(8.0, 0, 0, 8.0),
+                          child: Text(
+                            'Tanggal Prospek', // Label di atas kotak dropdown
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        // Text(
+                        //   ' *',
+                        //   style: TextStyle(
+                        //     color: Colors.red,
+                        //   ),
+                        // ),
+
+                        Row(
+                          children: [
+                            Expanded(
+                              child: TextFormField(
+                                readOnly: true,
+                                onTap: () {
+                                  showDatePicker(
+                                    context: context,
+                                    initialDate: DateTime.now(),
+                                    firstDate: DateTime(2000),
+                                    lastDate: DateTime(2030),
+                                  ).then((pickedDate) {
+                                    if (pickedDate != null) {
+                                      setState(() {
+                                        selectedDate = pickedDate;
+                                      });
+                                    }
+                                  });
+                                },
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(),
+                                  labelText: 'Pilih Tanggal',
+                                ),
+                                controller: TextEditingController(
+                                  text: selectedDate != null
+                                      ? DateFormat('yyyy-MM-dd')
+                                          .format(selectedDate)
+                                      : '',
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
-                ),
+                ],
               ),
-              Container(
-                height: 2.0,
-                color: Colors.blue,
-              ),
+
               SizedBox(height: 5),
               Row(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 8.0),
+                    padding: const EdgeInsets.fromLTRB(8.0, 0, 0, 0),
                     child: Text(
                       'Proyek', // Label di atas kotak dropdown
                       style: TextStyle(
@@ -96,12 +168,14 @@ class _FormReservState extends State<FormReserv> {
                     .toList(),
               ),
               SizedBox(height: 5),
+              // Rest of your code...
+
               Row(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 8.0),
+                    padding: const EdgeInsets.fromLTRB(8.0, 0, 0, 0),
                     child: Text(
-                      'Cluster', // Label di atas kotak dropdown
+                      'Sumber info ', // Label di atas kotak dropdown
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                       ),
@@ -116,42 +190,7 @@ class _FormReservState extends State<FormReserv> {
                 ],
               ),
               DropdownButton<angka?>(
-                hint: Text("Pilih Cluster"),
-                value: selectedValue,
-                onChanged: (value) {
-                  setState(() {
-                    selectedValue = value;
-                  });
-                },
-                isExpanded: true,
-                items: angkas
-                    .map<DropdownMenuItem<angka?>>((e) => DropdownMenuItem(
-                          child: Text((e?.name ?? '').toString()),
-                          value: e,
-                        ))
-                    .toList(),
-              ),
-              SizedBox(height: 5),
-              // Rest of your code...
-
-              Row(
-                children: [
-                  Text(
-                    'Cluster', // Label di atas kotak dropdown
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Text(
-                    ' *',
-                    style: TextStyle(
-                      color: Colors.red,
-                    ),
-                  ),
-                ],
-              ),
-              DropdownButton<angka?>(
-                  hint: Text("Pilih Cluster"),
+                  hint: Text("Piilih Sumber"),
                   value: selectedValue,
                   onChanged: (value) {
                     setState(() {
@@ -172,98 +211,81 @@ class _FormReservState extends State<FormReserv> {
               ),
               Row(
                 children: [
-                  Text(
-                    'Type ', // Label di atas kotak dropdown
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Text(
-                    ' *',
-                    style: TextStyle(
-                      color: Colors.red,
-                    ),
-                  ),
-                ],
-              ),
-              DropdownButton<angka?>(
-                  hint: Text("Piilih tipe"),
-                  value: selectedValue,
-                  onChanged: (value) {
-                    setState(() {
-                      selectedValue = value;
-                    });
-                  },
-
-                  // underline: SizedBox(),
-                  isExpanded: true,
-                  items: angkas
-                      .map<DropdownMenuItem<angka?>>((e) => DropdownMenuItem(
-                            child: Text((e?.name ?? '').toString()),
-                            value: e,
-                          ))
-                      .toList()),
-              SizedBox(
-                height: 5,
-              ),
-              Row(
-                children: [
-                  Text(
-                    'Unit ', // Label di atas kotak dropdown
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Text(
-                    ' *',
-                    style: TextStyle(
-                      color: Colors.red,
-                    ),
-                  ),
-                ],
-              ),
-              DropdownButton<angka?>(
-                  hint: Text("Pilih Uniit"),
-                  value: selectedValue,
-                  onChanged: (value) {
-                    setState(() {
-                      selectedValue = value;
-                    });
-                  },
-
-                  // underline: SizedBox(),
-                  isExpanded: true,
-                  items: angkas
-                      .map<DropdownMenuItem<angka?>>((e) => DropdownMenuItem(
-                            child: Text((e?.name ?? '').toString()),
-                            value: e,
-                          ))
-                      .toList()),
-              SizedBox(
-                height: 5,
-              ),
-
-              // label before label of label form field
-              Container(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 10.0),
-                      child: Text(
-                        'Data Konsumen', // Label di atas kotak dropdown
-                        style: TextStyle(
-                          color: Colors.blue,
-                          fontWeight: FontWeight.bold,
-                        ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(8.0, 0, 0, 0),
+                    child: Text(
+                      'Kontak Melalui ', // Label di atas kotak dropdown
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Container(
-                      height: 2.0,
-                      color: Colors.blue,
+                  ),
+                  Text(
+                    ' *',
+                    style: TextStyle(
+                      color: Colors.red,
                     ),
-                  ],
-                ),
+                  ),
+                ],
+              ),
+              DropdownButton<angka?>(
+                  hint: Text("Pilih Kontak"),
+                  value: selectedValue,
+                  onChanged: (value) {
+                    setState(() {
+                      selectedValue = value;
+                    });
+                  },
+
+                  // underline: SizedBox(),
+                  isExpanded: true,
+                  items: angkas
+                      .map<DropdownMenuItem<angka?>>((e) => DropdownMenuItem(
+                            child: Text((e?.name ?? '').toString()),
+                            value: e,
+                          ))
+                      .toList()),
+              SizedBox(
+                height: 5,
+              ),
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(8.0, 0, 0, 0),
+                    child: Text(
+                      'Status Prospek ', // Label di atas kotak dropdown
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  Text(
+                    ' *',
+                    style: TextStyle(
+                      color: Colors.red,
+                    ),
+                  ),
+                ],
+              ),
+              DropdownButton<angka?>(
+                  hint: Text("Pilih Status Prospek"),
+                  value: selectedValue,
+                  onChanged: (value) {
+                    setState(() {
+                      selectedValue = value;
+                    });
+                  },
+
+                  // underline: SizedBox(),
+                  isExpanded: true,
+                  items: angkas
+                      .map<DropdownMenuItem<angka?>>((e) => DropdownMenuItem(
+                            child: Text((e?.name ?? '').toString()),
+                            value: e,
+                          ))
+                      .toList()),
+              SizedBox(
+                height: 5,
               ),
               Column(
                 children: [
@@ -276,7 +298,7 @@ class _FormReservState extends State<FormReserv> {
                           children: [
                             SizedBox(height: 8.0),
                             Text(
-                              'Nama Lengkap',
+                              'Catatan',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                               ),
@@ -297,7 +319,7 @@ class _FormReservState extends State<FormReserv> {
                     validator: (value) {},
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
-                      labelText: 'Masukan Nama Lengkap',
+                      labelText: '',
                     ),
                   ),
                   SizedBox(
@@ -312,7 +334,7 @@ class _FormReservState extends State<FormReserv> {
                           children: [
                             SizedBox(height: 8.0),
                             Text(
-                              'No Identitas',
+                              'Nama Prospek',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                               ),
@@ -333,7 +355,7 @@ class _FormReservState extends State<FormReserv> {
                     validator: (value) {},
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
-                      labelText: 'Masukan No Identitas',
+                      labelText: 'Masukan Nama Prospek',
                     ),
                   ),
                   // Rest of your code...
@@ -384,40 +406,6 @@ class _FormReservState extends State<FormReserv> {
                       children: [
                         SizedBox(height: 8.0),
                         Text(
-                          'Email', // Label di atas kotak dropdown
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Text(
-                          ' *',
-                          style: TextStyle(
-                            color: Colors.red,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              TextFormField(
-                // controller: textController,
-                validator: (value) {},
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(), label: Text('Masukan Email')),
-              ),
-              // SizedBox(
-              //   height: 5,
-              // ),
-              Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(height: 8.0),
-                        Text(
                           'Alamat', // Label di atas kotak dropdown
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
@@ -441,123 +429,45 @@ class _FormReservState extends State<FormReserv> {
                     border: OutlineInputBorder(),
                     label: Text('Masukan Alamat')),
               ),
-              // SizedBox(
-              //   height: 5,
-              // ),
+              SizedBox(
+                height: 5,
+              ),
               Row(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(height: 8.0),
-                        Text(
-                          'Nominal Reservasi', // Label di atas kotak dropdown
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Text(
-                          ' *',
-                          style: TextStyle(
-                            color: Colors.red,
-                          ),
-                        ),
-                      ],
+                    padding: const EdgeInsets.fromLTRB(8.0, 0, 0, 0),
+                    child: Text(
+                      'Pekerjaan', // Label di atas kotak dropdown
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  Text(
+                    ' *',
+                    style: TextStyle(
+                      color: Colors.red,
                     ),
                   ),
                 ],
               ),
-              TextFormField(
-                // controller: textController,
-                validator: (value) {},
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    label: Text('Masukan Nominal Reservasi')),
-              ),
-              // SizedBox(
-              //   height: 5,
-              // ),
-              Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(height: 8.0),
-                        Text(
-                          'Nominal Reservasi', // Label di atas kotak dropdown
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Text(
-                          ' *',
-                          style: TextStyle(
-                            color: Colors.red,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              TextFormField(
-                // controller: textController,
-                validator: (value) {},
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    label: Text('Masukan Nominal Reservasi')),
-              ),
-              // SizedBox(
-              //   height: 5,
-              // ),
-              Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(height: 8.0),
-                        Text(
-                          'Keterangan', // Label di atas kotak dropdown
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Text(
-                          ' *',
-                          style: TextStyle(
-                            color: Colors.red,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              TextFormField(
-                controller: textController,
-                validator: (value) {
-                  // if (value!.isEmpty) {
-                  //   return 'Teks tidak boleh kosong';
-                  // }
-                  // return null;
+              DropdownButton<angka?>(
+                hint: Text("Pilih Pekerjaan"),
+                value: selectedValue,
+                onChanged: (value) {
+                  setState(() {
+                    selectedValue = value;
+                  });
                 },
-                decoration: InputDecoration(
-                    // counterText: '${10 - (textController.text.length)}',
-                    counterStyle: TextStyle(fontSize: 12),
-                    border: OutlineInputBorder(),
-                    label: Text(
-                      'Masukan Keterangan',
-                    )),
+                isExpanded: true,
+                items: angkas
+                    .map<DropdownMenuItem<angka?>>((e) => DropdownMenuItem(
+                          child: Text((e?.name ?? '').toString()),
+                          value: e,
+                        ))
+                    .toList(),
               ),
-              // SizedBox(
-              //   height: 5,
-              // ),
+              // SizedBox(height: 5),
               Row(
                 children: [
                   Padding(
@@ -567,7 +477,7 @@ class _FormReservState extends State<FormReserv> {
                       children: [
                         SizedBox(height: 8.0),
                         Text(
-                          'Marketing', // Label di atas kotak dropdown
+                          'Deskripsi Pekerjaan', // Label di atas kotak dropdown
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                           ),
@@ -587,23 +497,54 @@ class _FormReservState extends State<FormReserv> {
                 // controller: textController,
                 validator: (value) {},
                 decoration: InputDecoration(
-                    border: OutlineInputBorder(), label: Text('')),
+                    border: OutlineInputBorder(),
+                    label: Text('Masukan Deskripsi Pekerjaan')),
+              ),
+              // SizedBox(
+              //   height: 5,
+              // ),
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(height: 8.0),
+                        Text(
+                          'Penghasilan Tetap / Gaji', // Label di atas kotak dropdown
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          ' *',
+                          style: TextStyle(
+                            color: Colors.red,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              TextFormField(
+                // controller: textController,
+                validator: (value) {},
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    label: Text('Penghasilan Tetap / Gaji')),
               ),
               SizedBox(
-                height: 12,
+                height: 5,
               ),
-              Center(
-                child: SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                      onPressed: () {}, child: Text("Buat Reservasi")),
-                ),
-              )
             ]),
           ),
         ),
+        // ],
       ),
     );
+    // );
   }
 }
 
