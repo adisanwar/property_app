@@ -1,226 +1,272 @@
-import 'dart:math';
-import 'package:flutter/cupertino.dart';
+import 'package:d_chart/d_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:property_app/components/profile.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
-
+  static const RouteName = '/homepage';
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  double value = 0;
-  bool isMarketingExpanded =
-      true; // Menyimpan status submenu Marketing terbuka atau tidak
-  bool isMenuOpen = false;
-  List<String> marketingSubmenuItems = [
-    "Campaigns",
-    "Analytics",
-    "Leads",
-  ];
-  // ...
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  Colors.blue,
-                  Colors.blue,
-                ],
-                begin: Alignment.bottomCenter,
-                end: Alignment.topCenter,
-              ),
-            ),
-          ),
-
-          SafeArea(
-            child: Container(
-              width: 200.0,
-              padding: EdgeInsets.all(9.0),
+      appBar: AppBar(
+        title: Text('Dashboard'),
+      ),
+      drawer: Drawer(
+        child: ListView(
+          children: [
+            DrawerHeader(
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  DrawerHeader(
-                    child: Column(
-                      // mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        CircleAvatar(
-                          radius: 24.0,
-                          child: Icon(
-                            CupertinoIcons.person,
-                          ),
-                        ),
-                        SizedBox(
-                          height: 10.0,
-                        ),
-                        Text(
-                          "Uzumaki Naruto",
-                          style: TextStyle(color: Colors.white, fontSize: 20.0),
-                        ),
-                      ],
-                    ),
+                  SizedBox(height: 30),
+                  CircleAvatar(
+                    radius: 30,
+                    // backgroundImage: AssetImage('assets/avatar.png'),
                   ),
-                  Expanded(
-                    child: ListView(
-                      children: [
-                        ListTile(
-                          onTap: () {},
-                          leading: Icon(
-                            Icons.home,
-                            color: Colors.white,
-                          ),
-                          title: Text(
-                            "Dashboard",
-                            style: TextStyle(
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                        ListTile(
-                          onTap: () {},
-                          leading: Icon(
-                            Icons.map,
-                            color: Colors.white,
-                          ),
-                        ),
-                        ExpansionTile(
-                          title: Row(
-                            children: [
-                              Icon(
-                                Icons.bar_chart,
-                                color: Colors.white,
-                              ),
-                              SizedBox(width: 10.0),
-                              Text(
-                                "Marketing",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        ExpansionTile(
-                          title: Row(
-                            children: [
-                              Icon(
-                                Icons.bar_chart,
-                                color: Colors.white,
-                              ),
-                              SizedBox(width: 10.0),
-                              Text(
-                                "Marketing",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ],
-                          ),
-                          children: marketingSubmenuItems.map((String item) {
-                            return ListTile(
-                              onTap: () {
-                                // Aksi yang akan dijalankan ketika submenu di-tap
-                                // Contoh: Navigasi ke halaman terkait
-                                print("Menu '$item' di-tap");
-                              },
-
-                              // leading: Icon(
-                              //   // Icons.arrow_forward,
-                              //   color: Colors.white,
-                              // ),
-                              title: Text(
-                                item,
-                                style: TextStyle(
-                                  color: Colors.white,
-                                ),
-                              ),
-                            );
-                          }).toList(),
-                        ),
-                        ListTile(
-                          onTap: () {},
-                          leading: Icon(
-                            Icons.settings,
-                            color: Colors.white,
-                          ),
-                          title: Text(
-                            "Pengaturan",
-                            style: TextStyle(
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                        ListTile(
-                          onTap: () {},
-                          leading: Icon(
-                            Icons.logout,
-                            color: Colors.white,
-                          ),
-                          title: Text(
-                            "Logout",
-                            style: TextStyle(
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                  SizedBox(height: 10),
+                  Text(
+                    'John Doe',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    'Marketing',
+                    style:
+                        TextStyle(fontSize: 12, fontWeight: FontWeight.normal),
                   ),
                 ],
               ),
             ),
-          ),
-          //
-          // GestureDetector(
-          //   onTap: () {
-          //     if (isMenuOpen) {
-          //       setState(() {
-          //         isMenuOpen =
-          //             false; // Menutup menu ketika di ketuk di area body
-          //       });
-          //     }
-          //   },
-          // ),
-          TweenAnimationBuilder(
-            tween: Tween<double>(
-                begin: 0,
-                end: isMenuOpen ? 1 : 0), // Menggunakan nilai isMenuOpen
-            duration: Duration(milliseconds: 500),
-            builder: (_, double val, __) {
-              return Transform(
-                alignment: Alignment.center,
-                transform: Matrix4.identity()
-                  ..setEntry(3, 2, 0.001)
-                  ..setEntry(0, 3, 200 * val)
-                  ..rotateY((pi / 6) * val),
-                child: Scaffold(
-                  appBar: AppBar(
-                    leading: InkWell(
-                      // Tambahkan InkWell sebagai tombol menu
-                      onTap: () {
-                        setState(() {
-                          isMenuOpen =
-                              !isMenuOpen; // Toggle status menu terbuka atau tidak
-                        });
-                      },
-                      child: Icon(
-                        Icons.menu,
+            Divider(
+                // color: Colors.blue,
+                thickness: 2),
+            ListTile(
+              leading: Icon(Icons.dashboard),
+              title: Text('Dashboard'),
+              onTap: () {
+                // Tindakan saat menu Dashboard diklik
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.map),
+              title: Text('Siteplan'),
+              onTap: () {
+                // Navigator.of(context).pushNamed('/infocard');
+                // Tindakan saat menu Siteplan diklik
+              },
+            ),
+            ExpansionTile(
+              leading: Icon(Icons.bar_chart),
+              title: Text('Marketing'),
+              children: [
+                ListTile(
+                  title: Text('Prospek Konsumen'),
+                  onTap: () {
+                    // Tindakan saat submenu Campaign diklik
+                  },
+                ),
+                ListTile(
+                  title: Text('Reserve Unit'),
+                  onTap: () {
+                    // Tindakan saat submenu Analytics diklik
+                  },
+                ),
+                ListTile(
+                  title: Text('Booking Unit'),
+                  onTap: () {
+                    // Tindakan saat submenu Analytics diklik
+                  },
+                ),
+                ListTile(
+                  title: Text('Laporan Status Unit'),
+                  onTap: () {
+                    // Tindakan saat submenu Analytics diklik
+                  },
+                ),
+                ListTile(
+                  title: Text('Laporan Penjualan'),
+                  onTap: () {
+                    // Tindakan saat submenu Analytics diklik
+                  },
+                ),
+                ListTile(
+                  title: Text('Laporan Pembatalan'),
+                  onTap: () {
+                    // Tindakan saat submenu Analytics diklik
+                  },
+                ),
+              ],
+            ),
+            ExpansionTile(
+              leading: Icon(Icons.attach_money),
+              title: Text('Keuangan'),
+              children: [
+                ListTile(
+                  title: Text('Progress Pembayaran'),
+                  onTap: () {
+                    Navigator.of(context).pushNamed('/paymentprogress');
+                    // Tindakan saat submenu Pendapatan diklik
+                  },
+                ),
+                ListTile(
+                  title: Text('Daftar Tunggakan'),
+                  onTap: () {
+                    // Tindakan saat submenu Pengeluaran diklik
+                  },
+                ),
+              ],
+            ),
+            Divider(
+              thickness: 2,
+            ),
+            ListTile(
+              leading: Icon(Icons.person),
+              title: Text('Account'),
+              onTap: () {
+                Navigator.of(context).pushNamed('/profile');
+                // Tindakan saat menu Siteplan diklik
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.settings),
+              title: Text('Setting'),
+              onTap: () {
+                // Tindakan saat menu Siteplan diklik
+              },
+            ),
+          ],
+        ),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Card(
+              child: ListTile(
+                title: Text('Progress Bangunan'),
+              ),
+            ),
+            Column(
+              children: [
+                Card(
+                  child: Padding(
+                    padding: EdgeInsets.all(16),
+                    child: AspectRatio(
+                      aspectRatio: 16 / 9,
+                      child: DChartPie(
+                        data: [
+                          {'domain': 'Flutter', 'measure': 28},
+                          {'domain': 'React Native', 'measure': 27},
+                          {'domain': 'Ionic', 'measure': 20},
+                          {'domain': 'Cordova', 'measure': 15},
+                        ],
+                        fillColor: (pieData, index) {
+                          switch (pieData['domain']) {
+                            case 'Flutter':
+                              return Colors.blue;
+                            case 'React Native':
+                              return Colors.blueAccent;
+                            case 'Ionic':
+                              return Colors.lightBlue;
+                            default:
+                              return Colors.orange;
+                          }
+                        },
+                        pieLabel: (pieData, index) {
+                          return "${pieData['domain']}:\n${pieData['measure']}%";
+                        },
+                        labelPosition: PieLabelPosition.outside,
+                        donutWidth: 20,
                       ),
                     ),
-                    title: Text("Dashboard"),
-                  ),
-                  body: Center(
-                    child: Text("Swipe right to Open Menu"),
                   ),
                 ),
-              );
-            },
-          ),
-        ],
+              ],
+            ),
+            Column(
+              children: [
+                Card(
+                  child: ListTile(
+                    title: Text('Resume Penjualan'),
+                  ),
+                ),
+              ],
+            ),
+            Column(
+              children: [
+                Card(
+                  child: Padding(
+                    padding: EdgeInsets.all(16),
+                    child: AspectRatio(
+                      aspectRatio: 16 / 9,
+                      child: DChartBar(
+                        data: [
+                          const {
+                            'id': 'Bar',
+                            'data': [
+                              {'domain': '2020', 'measure': 3},
+                              {'domain': '2021', 'measure': 4},
+                              {'domain': '2022', 'measure': 6},
+                              {'domain': '2023', 'measure': 0.3},
+                            ],
+                          },
+                        ],
+                        domainLabelPaddingToAxisLine: 16,
+                        axisLineTick: 2,
+                        axisLinePointTick: 2,
+                        axisLinePointWidth: 10,
+                        axisLineColor: Colors.blue,
+                        measureLabelPaddingToAxisLine: 16,
+                        barColor: (barData, index, id) => Colors.blue,
+                        showBarValue: true,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Card(
+              child: ListTile(
+                title: Text('Prospek Penjualan'),
+              ),
+            ),
+            Column(
+              children: [
+                Card(
+                  child: Padding(
+                    padding: EdgeInsets.all(16),
+                    child: AspectRatio(
+                      aspectRatio: 16 / 9,
+                      child: DChartBar(
+                        data: [
+                          const {
+                            'id': 'Bar',
+                            'data': [
+                              {'domain': '2020', 'measure': 3},
+                              {'domain': '2021', 'measure': 4},
+                              {'domain': '2022', 'measure': 6},
+                              {'domain': '2023', 'measure': 0.3},
+                            ],
+                          },
+                        ],
+                        domainLabelPaddingToAxisLine: 16,
+                        axisLineTick: 2,
+                        axisLinePointTick: 2,
+                        axisLinePointWidth: 10,
+                        axisLineColor: Colors.blue,
+                        measureLabelPaddingToAxisLine: 16,
+                        barColor: (barData, index, id) => Colors.blue,
+                        showBarValue: true,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 
 const List<String> list = <String>['One', 'Two', 'Three', 'Four'];
 
-class InfocardProjek extends StatefulWidget {
-  const InfocardProjek({super.key});
+class InfoCard extends StatefulWidget {
+  static const RouteName = '/InfoCard';
+  const InfoCard({super.key});
 
   @override
-  State<InfocardProjek> createState() => _InfocardProjekState();
+  State<InfoCard> createState() => _InfoCardState();
 }
 
-class _InfocardProjekState extends State<InfocardProjek> {
+class _InfoCardState extends State<InfoCard> {
   String dropdownValue = list.first;
   @override
   Widget build(BuildContext context) {
