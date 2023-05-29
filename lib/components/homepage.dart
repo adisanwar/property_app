@@ -1,17 +1,25 @@
 import 'dart:math';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class SideMenu extends StatefulWidget {
-  const SideMenu({super.key});
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
 
   @override
-  State<SideMenu> createState() => _SideMenuState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _SideMenuState extends State<SideMenu> {
+class _HomePageState extends State<HomePage> {
   double value = 0;
+  bool isMarketingExpanded =
+      true; // Menyimpan status submenu Marketing terbuka atau tidak
+  bool isMenuOpen = false;
+  List<String> marketingSubmenuItems = [
+    "Campaigns",
+    "Analytics",
+    "Leads",
+  ];
+  // ...
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,6 +37,7 @@ class _SideMenuState extends State<SideMenu> {
               ),
             ),
           ),
+
           SafeArea(
             child: Container(
               width: 200.0,
@@ -37,7 +46,7 @@ class _SideMenuState extends State<SideMenu> {
                 children: [
                   DrawerHeader(
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
+                      // mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         CircleAvatar(
                           radius: 24.0,
@@ -77,38 +86,60 @@ class _SideMenuState extends State<SideMenu> {
                             Icons.map,
                             color: Colors.white,
                           ),
-                          title: Text(
-                            "Site Plan",
-                            style: TextStyle(
-                              color: Colors.white,
-                            ),
+                        ),
+                        ExpansionTile(
+                          title: Row(
+                            children: [
+                              Icon(
+                                Icons.bar_chart,
+                                color: Colors.white,
+                              ),
+                              SizedBox(width: 10.0),
+                              Text(
+                                "Marketing",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                        ListTile(
-                          onTap: () {},
-                          leading: Icon(
-                            Icons.bar_chart,
-                            color: Colors.white,
+                        ExpansionTile(
+                          title: Row(
+                            children: [
+                              Icon(
+                                Icons.bar_chart,
+                                color: Colors.white,
+                              ),
+                              SizedBox(width: 10.0),
+                              Text(
+                                "Marketing",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ],
                           ),
-                          title: Text(
-                            "Marketing",
-                            style: TextStyle(
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                        ListTile(
-                          onTap: () {},
-                          leading: Icon(
-                            Icons.money,
-                            color: Colors.white,
-                          ),
-                          title: Text(
-                            "Keuangan",
-                            style: TextStyle(
-                              color: Colors.white,
-                            ),
-                          ),
+                          children: marketingSubmenuItems.map((String item) {
+                            return ListTile(
+                              onTap: () {
+                                // Aksi yang akan dijalankan ketika submenu di-tap
+                                // Contoh: Navigasi ke halaman terkait
+                                print("Menu '$item' di-tap");
+                              },
+
+                              // leading: Icon(
+                              //   // Icons.arrow_forward,
+                              //   color: Colors.white,
+                              // ),
+                              title: Text(
+                                item,
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
+                              ),
+                            );
+                          }).toList(),
                         ),
                         ListTile(
                           onTap: () {},
@@ -143,11 +174,24 @@ class _SideMenuState extends State<SideMenu> {
               ),
             ),
           ),
+          //
+          // GestureDetector(
+          //   onTap: () {
+          //     if (isMenuOpen) {
+          //       setState(() {
+          //         isMenuOpen =
+          //             false; // Menutup menu ketika di ketuk di area body
+          //       });
+          //     }
+          //   },
+          // ),
           TweenAnimationBuilder(
-            tween: Tween<double>(begin: 0, end: value),
+            tween: Tween<double>(
+                begin: 0,
+                end: isMenuOpen ? 1 : 0), // Menggunakan nilai isMenuOpen
             duration: Duration(milliseconds: 500),
             builder: (_, double val, __) {
-              return (Transform(
+              return Transform(
                 alignment: Alignment.center,
                 transform: Matrix4.identity()
                   ..setEntry(3, 2, 0.001)
@@ -155,31 +199,27 @@ class _SideMenuState extends State<SideMenu> {
                   ..rotateY((pi / 6) * val),
                 child: Scaffold(
                   appBar: AppBar(
+                    leading: InkWell(
+                      // Tambahkan InkWell sebagai tombol menu
+                      onTap: () {
+                        setState(() {
+                          isMenuOpen =
+                              !isMenuOpen; // Toggle status menu terbuka atau tidak
+                        });
+                      },
+                      child: Icon(
+                        Icons.menu,
+                      ),
+                    ),
                     title: Text("Dashboard"),
                   ),
                   body: Center(
                     child: Text("Swipe right to Open Menu"),
                   ),
                 ),
-              ));
+              );
             },
           ),
-          GestureDetector(
-            onHorizontalDragUpdate: (e) {
-              if (e.delta.dx > 0) {
-                setState(() {
-                  value = 1;
-                });
-              } else {
-                value = 0;
-              }
-            },
-            // onTap: () {
-            //   setState(() {
-            //     value == 0 ? value = 1 : value = 0;
-            //   });
-            // },
-          )
         ],
       ),
     );

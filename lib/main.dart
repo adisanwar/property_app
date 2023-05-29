@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:property_app/components/chart_resume_penjualan.dart';
 import 'package:property_app/components/form_prospek_costumer.dart';
 import 'package:property_app/components/form_reserv.dart';
-import 'package:property_app/components/side_menu.dart';
+import 'package:property_app/components/homepage.dart';
 
+import 'components/dashboard.dart';
 import 'components/infocard_projek.dart';
 
 void main() {
@@ -12,9 +13,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  // This widget is the root of your application.
+  const MyApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -22,7 +21,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: InfocardProjek(),
+      home: DashboardPage(),
     );
   }
 }
