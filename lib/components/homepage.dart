@@ -40,9 +40,9 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-            Divider(
-                // color: Colors.blue,
-                thickness: 2),
+            // Divider(
+            //     // color: Colors.blue,
+            //     thickness: 2),
             ListTile(
               leading: Icon(Icons.dashboard),
               title: Text('Dashboard'),
@@ -54,6 +54,7 @@ class _HomePageState extends State<HomePage> {
               leading: Icon(Icons.map),
               title: Text('Siteplan'),
               onTap: () {
+                Navigator.of(context).pushNamed('/site');
                 // Navigator.of(context).pushNamed('/infocard');
                 // Tindakan saat menu Siteplan diklik
               },

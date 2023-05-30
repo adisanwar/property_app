@@ -8,7 +8,9 @@ import 'package:property_app/components/homepage.dart';
 import 'package:property_app/components/payment_card.dart';
 
 import 'components/infocard_projek.dart';
+import 'components/paymentprogress.dart';
 import 'components/profile.dart';
+import 'components/site.dart';
 
 void main() {
   runApp(const MyApp());
@@ -27,12 +29,13 @@ class MyApp extends StatelessWidget {
       initialRoute: HomePage.RouteName,
       routes: {
         HomePage.RouteName: (context) => HomePage(),
+        Site.RouteName: (context) => Site(),
         InfoCard.RouteName: (context) => InfoCard(),
         // ProspekCostumer.RouteName: (context) => ProspekCostumer(),
         // Reserve.RouteName: (context) => Reserve(),
         // Booking.RouteName: (context) => Booking(),
         // StatusReport.RouteName: (context) => StatusReport(),
-        // SellReport.RouteName: (context) => SellReport(),
+        // PaymentProgress.RouteName: (context) => PaymentProgress(),
         // CancelReport.RouteName: (context) => CancelReport(),
         PaymentProgress.RouteName: (context) => PaymentProgress(),
         // Arrears.RouteName: (context) => Arrears(),
