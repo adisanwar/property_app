@@ -37,6 +37,9 @@ dependencies:
   cupertino_icons: ^1.0.5
   intl: ^0.18.1
   d_chart: ^2.2.11
+  percent_indicator: ^4.2.3
+  mrx_charts: ^0.1.3
+  
   
   
 

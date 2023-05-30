@@ -1,6 +1,8 @@
 import 'package:d_chart/d_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:property_app/components/profile.dart';
+import 'package:property_app/components/site.dart';
 
 class HomePage extends StatefulWidget {
   static const RouteName = '/homepage';
@@ -47,6 +49,7 @@ class _HomePageState extends State<HomePage> {
               leading: Icon(Icons.dashboard),
               title: Text('Dashboard'),
               onTap: () {
+                Navigator.of(context).pushNamed(HomePage.RouteName);
                 // Tindakan saat menu Dashboard diklik
               },
             ),
@@ -54,7 +57,7 @@ class _HomePageState extends State<HomePage> {
               leading: Icon(Icons.map),
               title: Text('Siteplan'),
               onTap: () {
-                Navigator.of(context).pushNamed('/site');
+                Navigator.of(context).pushNamed(Site.RouteName);
                 // Navigator.of(context).pushNamed('/infocard');
                 // Tindakan saat menu Siteplan diklik
               },
@@ -146,43 +149,32 @@ class _HomePageState extends State<HomePage> {
           children: [
             Card(
               child: ListTile(
-                title: Text('Progress Bangunan'),
+                title: Text(
+                  'Progress Bangunan',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
               ),
             ),
             Column(
               children: [
                 Card(
                   child: Padding(
-                    padding: EdgeInsets.all(16),
-                    child: AspectRatio(
-                      aspectRatio: 16 / 9,
-                      child: DChartPie(
-                        data: [
-                          {'domain': 'Flutter', 'measure': 28},
-                          {'domain': 'React Native', 'measure': 27},
-                          {'domain': 'Ionic', 'measure': 20},
-                          {'domain': 'Cordova', 'measure': 15},
-                        ],
-                        fillColor: (pieData, index) {
-                          switch (pieData['domain']) {
-                            case 'Flutter':
-                              return Colors.blue;
-                            case 'React Native':
-                              return Colors.blueAccent;
-                            case 'Ionic':
-                              return Colors.lightBlue;
-                            default:
-                              return Colors.orange;
-                          }
-                        },
-                        pieLabel: (pieData, index) {
-                          return "${pieData['domain']}:\n${pieData['measure']}%";
-                        },
-                        labelPosition: PieLabelPosition.outside,
-                        donutWidth: 20,
-                      ),
-                    ),
-                  ),
+                      padding: EdgeInsets.all(16),
+                      child: Expanded(
+                        child: new CircularPercentIndicator(
+                          radius: 100.0,
+                          lineWidth: 20.0,
+                          animation: true,
+                          percent: 0.1,
+                          center: new Text(
+                            "10.0%",
+                            style: new TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 20.0),
+                          ),
+                          circularStrokeCap: CircularStrokeCap.round,
+                          progressColor: Colors.blue,
+                        ),
+                      )),
                 ),
               ],
             ),
@@ -190,7 +182,10 @@ class _HomePageState extends State<HomePage> {
               children: [
                 Card(
                   child: ListTile(
-                    title: Text('Resume Penjualan'),
+                    title: Text(
+                      'Resume Penjualan',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
                   ),
                 ),
               ],
@@ -230,7 +225,10 @@ class _HomePageState extends State<HomePage> {
             ),
             Card(
               child: ListTile(
-                title: Text('Prospek Penjualan'),
+                title: Text(
+                  'Prospek Penjualan',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
               ),
             ),
             Column(
@@ -259,6 +257,39 @@ class _HomePageState extends State<HomePage> {
                         axisLineColor: Colors.blue,
                         measureLabelPaddingToAxisLine: 16,
                         barColor: (barData, index, id) => Colors.blue,
+                        showBarValue: true,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Column(
+              children: [
+                Card(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8),
+                    child: AspectRatio(
+                      aspectRatio: 16 / 9,
+                      child: DChartBar(
+                        data: [
+                          {
+                            'id': 'Bar',
+                            'data': [
+                              {'domain': '2020', 'measure': 3},
+                              {'domain': '2021', 'measure': 4},
+                              {'domain': '2022', 'measure': 6},
+                              {'domain': '2023', 'measure': 0.3},
+                            ],
+                          },
+                        ],
+                        domainLabelPaddingToAxisLine: 16,
+                        axisLineTick: 2,
+                        axisLinePointTick: 2,
+                        axisLinePointWidth: 10,
+                        axisLineColor: Colors.green,
+                        measureLabelPaddingToAxisLine: 16,
+                        barColor: (barData, index, id) => Colors.green,
                         showBarValue: true,
                       ),
                     ),
