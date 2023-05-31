@@ -1,90 +1,66 @@
 import 'package:d_chart/d_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'package:percent_indicator/circular_percent_indicator.dart';
 
-class PaymentProgress extends StatefulWidget {
+class PaymentProgress extends StatelessWidget {
   static const RouteName = '/paymentprogress';
   const PaymentProgress({super.key});
 
   @override
-  State<PaymentProgress> createState() => _PaymentProgressState();
-}
-
-class _PaymentProgressState extends State<PaymentProgress> {
-  late String _selectedItem;
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        // backgroundColor: Colors.white,
-        title: Text(
-          'Progress Pembayaran',
+        appBar: AppBar(
+          title: Text('Prospek Penjualan'),
         ),
-      ),
-      body: Column(
-        children: [
+        body: SingleChildScrollView(
+            child: 
+            Column(children: [
+              ElevatedButton(onPressed: (){}, 
+              child: child)
+            ],
+          
+            Column(children: [
           Card(
-            child: Padding(
-              padding: const EdgeInsets.all(10),
-              child: AspectRatio(
-                aspectRatio: 16 / 9,
-                child: DChartTime(
-                  chartRender: DRenderBar(),
-                  measureLabel: (value) => '${value}k',
-                  domainLabel: (dateTime) {
-                    // [DateFormat] from intl package
-                    return DateFormat('d MMM yy').format(dateTime!);
-                  },
-                  groupData: [
-                    DChartTimeGroup(
-                      id: 'Keyboard',
-                      color: Colors.blue,
-                      data: [
-                        DChartTimeData(time: DateTime(2023, 2, 1), value: 29),
-                        DChartTimeData(time: DateTime(2023, 2, 2), value: 73),
-                        DChartTimeData(
-                            time: DateTime(
-                              2023,
-                              2,
-                            ),
-                            value: 73),
-                        DChartTimeData(time: DateTime(2023, 2, 4), value: 23),
-                        DChartTimeData(time: DateTime(2023, 2, 8), value: 56),
-                        DChartTimeData(time: DateTime(2023, 2, 9), value: 32),
-                        DChartTimeData(time: DateTime(2023, 2, 10), value: 21),
-                        DChartTimeData(time: DateTime(2023, 2, 12), value: 76),
-                        DChartTimeData(time: DateTime(2023, 2, 18), value: 91),
-                        DChartTimeData(time: DateTime(2023, 2, 20), value: 17),
-                      ],
-                    ),
-                    DChartTimeGroup(
-                      id: 'mouse',
-                      color: Colors.yellow,
-                      data: [
-                        DChartTimeData(time: DateTime(2023, 2, 1), value: 29),
-                        DChartTimeData(time: DateTime(2023, 2, 2), value: 73),
-                        DChartTimeData(
-                            time: DateTime(
-                              2023,
-                              2,
-                            ),
-                            value: 73),
-                        DChartTimeData(time: DateTime(2023, 2, 4), value: 23),
-                        DChartTimeData(time: DateTime(2023, 2, 8), value: 40),
-                        DChartTimeData(time: DateTime(2023, 2, 9), value: 32),
-                        DChartTimeData(time: DateTime(2023, 2, 10), value: 21),
-                        DChartTimeData(time: DateTime(2023, 2, 12), value: 76),
-                        DChartTimeData(time: DateTime(2023, 2, 18), value: 91),
-                        DChartTimeData(time: DateTime(2023, 2, 20), value: 17),
-                      ],
-                    ),
-                  ],
-                ),
+            child: ListTile(
+              title: Text(
+                'Progress Bangunan',
+                style: TextStyle(fontWeight: FontWeight.bold),
               ),
             ),
           ),
-        ],
-      ),
-    );
+          Column(
+            children: [
+              Card(
+                child: Padding(
+                  padding: EdgeInsets.all(16),
+                  child: AspectRatio(
+                    aspectRatio: 16 / 9,
+                    child: DChartBar(
+                      data: [
+                        const {
+                          'id': 'Bar',
+                          'data': [
+                            {'domain': '2020', 'measure': 3},
+                            {'domain': '2021', 'measure': 4},
+                            {'domain': '2022', 'measure': 6},
+                            {'domain': '2023', 'measure': 0.3},
+                          ],
+                        },
+                      ],
+                      domainLabelPaddingToAxisLine: 16,
+                      axisLineTick: 2,
+                      axisLinePointTick: 2,
+                      axisLinePointWidth: 10,
+                      axisLineColor: Colors.blue,
+                      measureLabelPaddingToAxisLine: 16,
+                      barColor: (barData, index, id) => Colors.blue,
+                      showBarValue: true,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ])));
   }
 }

@@ -159,8 +159,9 @@ class _HomePageState extends State<HomePage> {
               children: [
                 Card(
                   child: Padding(
-                      padding: EdgeInsets.all(16),
-                      child: Expanded(
+                      padding: EdgeInsets.all(8),
+                      child: AspectRatio(
+                        aspectRatio: 16 / 9,
                         child: new CircularPercentIndicator(
                           radius: 100.0,
                           lineWidth: 20.0,
