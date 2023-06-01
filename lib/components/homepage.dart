@@ -1,6 +1,7 @@
 import 'package:d_chart/d_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:property_app/components/costumerprospek.dart';
 import 'package:property_app/components/profile.dart';
 import 'package:property_app/components/site.dart';
 
@@ -55,7 +56,7 @@ class _HomePageState extends State<HomePage> {
             ),
             ListTile(
               leading: Icon(Icons.map),
-              title: Text('Siteplan'),
+              title: Text('Site Plan'),
               onTap: () {
                 Navigator.of(context).pushNamed(Site.RouteName);
                 // Navigator.of(context).pushNamed('/infocard');
@@ -69,6 +70,7 @@ class _HomePageState extends State<HomePage> {
                 ListTile(
                   title: Text('Prospek Konsumen'),
                   onTap: () {
+                    Navigator.of(context).pushNamed('/costumerprospek');
                     // Tindakan saat submenu Campaign diklik
                   },
                 ),
@@ -81,6 +83,7 @@ class _HomePageState extends State<HomePage> {
                 ListTile(
                   title: Text('Booking Unit'),
                   onTap: () {
+                    Navigator.of(context).pushNamed('/bookingunit');
                     // Tindakan saat submenu Analytics diklik
                   },
                 ),

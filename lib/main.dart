@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:property_app/components/bookingunit.dart';
 import 'package:property_app/components/chart_resume_penjualan.dart';
 import 'package:property_app/components/chartdemo.dart';
-import 'package:property_app/components/form_prospek_costumer.dart';
-import 'package:property_app/components/form_reserv.dart';
+import 'package:property_app/components/costumerprospek.dart';
+
 import 'package:property_app/components/homepage.dart';
 import 'package:property_app/components/payment_card.dart';
 
@@ -31,9 +32,9 @@ class MyApp extends StatelessWidget {
         HomePage.RouteName: (context) => HomePage(),
         Site.RouteName: (context) => Site(),
         InfoCard.RouteName: (context) => InfoCard(),
-        // ProspekCostumer.RouteName: (context) => ProspekCostumer(),
+        CostumerProspek.RouteName: (context) => CostumerProspek(),
         // Reserve.RouteName: (context) => Reserve(),
-        // Booking.RouteName: (context) => Booking(),
+        BookingUnit.RouteName: (context) => BookingUnit(),
         // StatusReport.RouteName: (context) => StatusReport(),
         // PaymentProgress.RouteName: (context) => PaymentProgress(),
         // CancelReport.RouteName: (context) => CancelReport(),

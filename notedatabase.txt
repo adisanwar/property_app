@@ -1,0 +1,7 @@
+
+
+
+dbname = property_app
+
+users = user_id, username, password, role
+
