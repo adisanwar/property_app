@@ -3,5 +3,8 @@
 
 dbname = property_app
 
-users = user_id, username, password, role
+users = User_id, Username, Password, Role
 
+prospek konsumen = prospek_id, sumber_info, proyek, kontak_melalui, status_prospek, catatan, nama_prospek, no_hp, alamat, pekerjaan, deskripsi_pekerjaan, gaji, tanggal
+
+reservasi = reservasi_id, proyek, cluster, tipe, unit, nama_lengkap, no_ktp, no_hp, email, alamat, nominal_reservasi, keterangan, marketing, tanggal

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class FormReserv extends StatefulWidget {
+  static const RouteName = '/formreserv';
   const FormReserv({super.key});
 
   @override
@@ -22,9 +23,15 @@ class _FormReservState extends State<FormReserv> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        // appBar: AppBar(
-        //   title: Text('Flutter'),
-        // ),
+        appBar: AppBar(
+          title: Text('Flutter'),
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ),
         backgroundColor: Colors.white,
         body: SingleChildScrollView(
           child: Container(
@@ -134,42 +141,6 @@ class _FormReservState extends State<FormReserv> {
               SizedBox(height: 5),
               // Rest of your code...
 
-              Row(
-                children: [
-                  Text(
-                    'Cluster', // Label di atas kotak dropdown
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Text(
-                    ' *',
-                    style: TextStyle(
-                      color: Colors.red,
-                    ),
-                  ),
-                ],
-              ),
-              DropdownButton<angka?>(
-                  hint: Text("Pilih Cluster"),
-                  value: selectedValue,
-                  onChanged: (value) {
-                    setState(() {
-                      selectedValue = value;
-                    });
-                  },
-
-                  // underline: SizedBox(),
-                  isExpanded: true,
-                  items: angkas
-                      .map<DropdownMenuItem<angka?>>((e) => DropdownMenuItem(
-                            child: Text((e?.name ?? '').toString()),
-                            value: e,
-                          ))
-                      .toList()),
-              SizedBox(
-                height: 5,
-              ),
               Row(
                 children: [
                   Text(
@@ -479,41 +450,7 @@ class _FormReservState extends State<FormReserv> {
               // SizedBox(
               //   height: 5,
               // ),
-              Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(height: 8.0),
-                        Text(
-                          'Nominal Reservasi', // Label di atas kotak dropdown
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Text(
-                          ' *',
-                          style: TextStyle(
-                            color: Colors.red,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              TextFormField(
-                // controller: textController,
-                validator: (value) {},
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    label: Text('Masukan Nominal Reservasi')),
-              ),
-              // SizedBox(
-              //   height: 5,
-              // ),
+
               Row(
                 children: [
                   Padding(

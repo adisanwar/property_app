@@ -77,6 +77,7 @@ class _HomePageState extends State<HomePage> {
                 ListTile(
                   title: Text('Reserve Unit'),
                   onTap: () {
+                    Navigator.of(context).pushNamed('/reserveunit');
                     // Tindakan saat submenu Analytics diklik
                   },
                 ),
@@ -102,6 +103,7 @@ class _HomePageState extends State<HomePage> {
                 ListTile(
                   title: Text('Laporan Pembatalan'),
                   onTap: () {
+                    Navigator.of(context).pushNamed('/failedreport');
                     // Tindakan saat submenu Analytics diklik
                   },
                 ),

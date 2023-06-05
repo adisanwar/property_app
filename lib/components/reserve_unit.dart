@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class CostumerProspek extends StatefulWidget {
-  static const RouteName = '/costumerprospek';
+class ReserveUnit extends StatefulWidget {
+  static const RouteName = '/reserveunit';
   @override
-  _CostumerProspekState createState() => _CostumerProspekState();
+  _ReserveUnitState createState() => _ReserveUnitState();
 }
 
-class _CostumerProspekState extends State<CostumerProspek> {
+class _ReserveUnitState extends State<ReserveUnit> {
   TextEditingController _searchController = TextEditingController();
   // String _selectedOption1 = '';
   // String _selectedOption2 = '';
@@ -167,7 +167,7 @@ class _CostumerProspekState extends State<CostumerProspek> {
               ListView.builder(
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
-                itemCount: 10,
+                itemCount: 2,
                 itemBuilder: (BuildContext context, int index) {
                   return Card(
                     child: Container(
@@ -203,7 +203,7 @@ class _CostumerProspekState extends State<CostumerProspek> {
           alignment: Alignment.bottomRight,
           child: FloatingActionButton(
             onPressed: () {
-              Navigator.of(context).pushNamed('/formprospekcostumer');
+              Navigator.of(context).pushNamed('/formreserv');
               // Aksi yang dijalankan ketika Floating Action Button ditekan
               print('Floating Action Button pressed');
             },
