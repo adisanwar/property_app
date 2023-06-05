@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:percent_indicator/linear_percent_indicator.dart';
 
 class BottomSheetMenu extends StatefulWidget {
   const BottomSheetMenu({super.key});
@@ -9,7 +11,45 @@ class BottomSheetMenu extends StatefulWidget {
 
 class _BottomSheetMenuState extends State<BottomSheetMenu> {
   bool isConditionMet = false; // Variabel kondisi
+  bool _submenu1Checked = false;
+  bool _submenu2Checked = false;
+  bool _getCheckboxValue(int index) {
+    if (index % 2 == 0) {
+      return _submenu1Checked;
+    } else {
+      return _submenu2Checked;
+    }
+  }
 
+  void _setCheckboxValue(int index, bool value) {
+    if (index % 2 == 0) {
+      setState(() {
+        _submenu1Checked = value;
+      });
+    } else {
+      setState(() {
+        _submenu2Checked = value;
+      });
+    }
+  }
+
+  // List<String> _checkboxTitles = [
+  //   'Mengisi Form Aplikasi Bermaterai',
+  //   'Pas Foto 3x4',
+  //   'Fotokopi Suami dan Istri (Bila Menikah)',
+  //   'Fotokopi Kartu Keluarga',
+  //   'Fotokopi NPWP Pribadi',
+  //   'Fotokopi NPWP dan SIUP Perusahaan Tempat Bekerja',
+  //   'Fotokopi Surat Nikah/Buku Nikah',
+  //   'Surat Keterangan Aktif Bekerja (Asli)',
+  //   'Surat Keterangan Tidak Memiliki Rumah Kelurahan (Sesuai KTP)',
+  //   'Surat Keterangan Domisili (Jika Alamat Sekarang Tidak Sesuai KTP)',
+  //   'SPT PPH 21',
+  //   'Slip Gaji 3 Bulan Terakhir (Asli)',
+  //   'Fotokopi SK Pengangkatan (Legalisir)',
+  //   'Rekening Koran (Tabungan) 3 Bulan Terakhir',
+  //   'Fotokopi ID Card Jamsostek',
+  // ];
   @override
   Widget build(BuildContext context) {
     return FractionallySizedBox(
@@ -37,7 +77,7 @@ class _BottomSheetMenuState extends State<BottomSheetMenu> {
                                 'Tombol Kiri Atas',
                                 style: TextStyle(
                                   fontSize: 16.0,
-                                  fontWeight: FontWeight.bold,
+                                  // fontWeight: FontWeight.bold,
                                 ),
                               ),
                               ElevatedButton(
@@ -54,7 +94,7 @@ class _BottomSheetMenuState extends State<BottomSheetMenu> {
                               ),
                             ],
                           ),
-                          // SizedBox(height: 10),
+                          SizedBox(height: 10),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -62,14 +102,14 @@ class _BottomSheetMenuState extends State<BottomSheetMenu> {
                                 'Tombol Kiri Atas',
                                 style: TextStyle(
                                   fontSize: 16.0,
-                                  fontWeight: FontWeight.bold,
+                                  // fontWeight: FontWeight.bold,
                                 ),
                               ),
                               Text(
                                 'Tombol Kiri Atas',
                                 style: TextStyle(
                                   fontSize: 16.0,
-                                  fontWeight: FontWeight.bold,
+                                  // fontWeight: FontWeight.bold,
                                 ),
                               ),
                             ],
@@ -136,7 +176,7 @@ class _BottomSheetMenuState extends State<BottomSheetMenu> {
                 ),
                 children: [
                   ListTile(
-                    title: Text('Submenu 1'),
+                    title: Text('SLF'),
                     trailing: Container(
                       width: 100, // Ukuran tombol
                       child: ElevatedButton(
@@ -153,7 +193,7 @@ class _BottomSheetMenuState extends State<BottomSheetMenu> {
                           ),
                         ),
                         child: Text(
-                          'Tombol 1',
+                          'Belum',
                           style: TextStyle(
                             color: Colors.white, // Warna teks putih
                           ),
@@ -162,7 +202,7 @@ class _BottomSheetMenuState extends State<BottomSheetMenu> {
                     ),
                   ),
                   ListTile(
-                    title: Text('Submenu 2'),
+                    title: Text('PPJB'),
                     trailing: Container(
                       width: 100, // Ukuran tombol
                       child: ElevatedButton(
@@ -179,7 +219,111 @@ class _BottomSheetMenuState extends State<BottomSheetMenu> {
                           ),
                         ),
                         child: Text(
-                          'Tombol 2',
+                          'Belum',
+                          style: TextStyle(
+                            color: Colors.white, // Warna teks putih
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  ListTile(
+                    title: Text('PBB'),
+                    trailing: Container(
+                      width: 100, // Ukuran tombol
+                      child: ElevatedButton(
+                        onPressed: () {
+                          // Logika ketika tombol Submenu 2 ditekan
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: isConditionMet
+                              ? Colors.green
+                              : Colors.red, // Warna tombol berdasarkan kondisi
+                          shape: RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.circular(10), // Border radius
+                          ),
+                        ),
+                        child: Text(
+                          'Belum',
+                          style: TextStyle(
+                            color: Colors.white, // Warna teks putih
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  ListTile(
+                    title: Text('AJB'),
+                    trailing: Container(
+                      width: 100, // Ukuran tombol
+                      child: ElevatedButton(
+                        onPressed: () {
+                          // Logika ketika tombol Submenu 2 ditekan
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: isConditionMet
+                              ? Colors.green
+                              : Colors.red, // Warna tombol berdasarkan kondisi
+                          shape: RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.circular(10), // Border radius
+                          ),
+                        ),
+                        child: Text(
+                          'Belum',
+                          style: TextStyle(
+                            color: Colors.white, // Warna teks putih
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  ListTile(
+                    title: Text('Sertifikat'),
+                    trailing: Container(
+                      width: 100, // Ukuran tombol
+                      child: ElevatedButton(
+                        onPressed: () {
+                          // Logika ketika tombol Submenu 2 ditekan
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: isConditionMet
+                              ? Colors.green
+                              : Colors.red, // Warna tombol berdasarkan kondisi
+                          shape: RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.circular(10), // Border radius
+                          ),
+                        ),
+                        child: Text(
+                          'Belum',
+                          style: TextStyle(
+                            color: Colors.white, // Warna teks putih
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  ListTile(
+                    title: Text('PBG'),
+                    trailing: Container(
+                      width: 100, // Ukuran tombol
+                      child: ElevatedButton(
+                        onPressed: () {
+                          // Logika ketika tombol Submenu 2 ditekan
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: isConditionMet
+                              ? Colors.green
+                              : Colors.red, // Warna tombol berdasarkan kondisi
+                          shape: RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.circular(10), // Border radius
+                          ),
+                        ),
+                        child: Text(
+                          'Belum',
                           style: TextStyle(
                             color: Colors.white, // Warna teks putih
                           ),
@@ -193,42 +337,254 @@ class _BottomSheetMenuState extends State<BottomSheetMenu> {
               ExpansionTile(
                 title: Text('Progress Bangunan'),
                 children: [
-                  ListTile(
-                    title: Text('Submenu 1'),
+                  // Progress Chart / Circular Indicator
+                  Card(
+                    child: Padding(
+                        padding: EdgeInsets.all(8),
+                        child: AspectRatio(
+                          aspectRatio: 16 / 9,
+                          child: new CircularPercentIndicator(
+                            radius: 80.0,
+                            lineWidth: 15.0,
+                            animation: true,
+                            percent: 0.1,
+                            center: new Text(
+                              "10.0%",
+                              style: new TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 20.0),
+                            ),
+                            circularStrokeCap: CircularStrokeCap.round,
+                            progressColor: Colors.blue,
+                          ),
+                        )),
                   ),
-                  ListTile(
-                    title: Text('Submenu 2'),
+                  // Padding(
+                  //   padding: EdgeInsets.all(15.0),
+                  //   child: new LinearPercentIndicator(
+                  //     width: 140.0,
+                  //     lineHeight: 14.0,
+                  //     percent: 0.5,
+                  //     center: Text(
+                  //       "50.0%",
+                  //       style: new TextStyle(fontSize: 12.0),
+                  //     ),
+                  //     trailing: Icon(Icons.mood),
+                  //     linearStrokeCap: LinearStrokeCap.roundAll,
+                  //     backgroundColor: Colors.grey,
+                  //     progressColor: Colors.blue,
+                  //   ),
+                  // ),
+                  SizedBox(height: 10),
+                  // Text and Percentage for Each Step
+                  StepProgress(
+                    stepText: 'Pondasi',
+                    stepPercentage: 20,
+                  ),
+                  StepProgress(
+                    stepText: 'Dinding',
+                    stepPercentage: 40,
+                  ),
+                  StepProgress(
+                    stepText: 'Plester dan Aci',
+                    stepPercentage: 60,
+                  ),
+                  StepProgress(
+                    stepText: 'Atap Baja Ringan',
+                    stepPercentage: 80,
+                  ),
+                  StepProgress(
+                    stepText: 'Genteng',
+                    stepPercentage: 90,
+                  ),
+                  StepProgress(
+                    stepText: 'Pasang Keramik',
+                    stepPercentage: 95,
+                  ),
+                  StepProgress(
+                    stepText: 'Pasang Kusen',
+                    stepPercentage: 100,
+                  ),
+                  StepProgress(
+                    stepText: 'Finishing',
+                    stepPercentage: 100,
+                  ),
+                  SizedBox(
+                    height: 10,
                   ),
                 ],
               ),
+              // SizedBox(
+              //   height: 10,
+              // ),
               ExpansionTile(
                 title: Text('Berkas Konsumen'),
                 children: [
+                  //   ListView.builder(
+                  //     itemCount: _checkboxTitles.length,
+                  //     itemBuilder: (BuildContext context, int index) {
+                  //       return Card(
+                  //         child: CheckboxListTile(
+                  //           title: Text(_checkboxTitles[index]),
+                  //           value: _getCheckboxValue(index),
+                  //           onChanged: (bool? value) {
+                  //             setState(() {
+                  //               _setCheckboxValue(index, value!);
+                  //             });
+                  //           },
+                  //         ),
+                  //       );
+                  //     },
+                  //   ),
+                  // ]),
                   CheckboxListTile(
-                    title: Text('Submenu 1'),
-                    value: false, // Status checkbox
+                    title: Text('Mengisi Form Aplikasi Bermaterai'),
+                    value: _submenu1Checked, // Status checkbox
                     onChanged: (bool? value) {
-                      // Logika ketika checkbox diubah
+                      setState(() {
+                        _submenu1Checked = value!;
+                      });
                     },
-                    // controlAffinity: ListTileControlAffinity
-                    //     .leading, // Posisi checkbox di sebelah kiri teks
                   ),
                   CheckboxListTile(
-                    title: Text('Submenu 2'),
-                    value: false, // Status checkbox
+                    title: Text('Pas Foto 3x4'),
+                    value: _submenu2Checked, // Status checkbox
                     onChanged: (bool? value) {
-                      // Logika ketika checkbox diubah
+                      setState(() {
+                        _submenu2Checked = value!;
+                      });
                     },
-                    // controlAffinity: ListTileControlAffinity
-                    //     .leading, // Posisi checkbox di sebelah kiri teks
+                  ),
+                  CheckboxListTile(
+                    title: Text('Fotokopi Suami dan Istri (Bila Menikah)'),
+                    value: _submenu1Checked, // Status checkbox
+                    onChanged: (bool? value) {
+                      setState(() {
+                        _submenu1Checked = value!;
+                      });
+                    },
+                  ),
+                  CheckboxListTile(
+                    title: Text('Fotokopi Kartu Keluarga'),
+                    value: _submenu2Checked, // Status checkbox
+                    onChanged: (bool? value) {
+                      setState(() {
+                        _submenu2Checked = value!;
+                      });
+                    },
+                  ),
+                  CheckboxListTile(
+                    title: Text('Fotokopi NPWP Pribadi'),
+                    value: _submenu1Checked, // Status checkbox
+                    onChanged: (bool? value) {
+                      setState(() {
+                        _submenu1Checked = value!;
+                      });
+                    },
+                  ),
+                  CheckboxListTile(
+                    title: Text(
+                        'Fotokopi NPWP dan SIUP Perusahaan Tempat Bekerja'),
+                    value: _submenu2Checked, // Status checkbox
+                    onChanged: (bool? value) {
+                      setState(() {
+                        _submenu2Checked = value!;
+                      });
+                    },
+                  ),
+                  CheckboxListTile(
+                    title: Text('Fotokopi Surat Nikah/Buku Nikah'),
+                    value: _submenu1Checked, // Status checkbox
+                    onChanged: (bool? value) {
+                      setState(() {
+                        _submenu1Checked = value!;
+                      });
+                    },
+                  ),
+                  CheckboxListTile(
+                    title: Text('Surat Keterangan Aktif Bekerja (Asli)'),
+                    value: _submenu2Checked, // Status checkbox
+                    onChanged: (bool? value) {
+                      setState(() {
+                        _submenu2Checked = value!;
+                      });
+                    },
+                  ),
+                  CheckboxListTile(
+                    title: Text(
+                        'Surat Keterangan Tidak Memiliki Rumah Kelurahan (Sesuai KTP)'),
+                    value: _submenu1Checked, // Status checkbox
+                    onChanged: (bool? value) {
+                      setState(() {
+                        _submenu1Checked = value!;
+                      });
+                    },
+                  ),
+                  CheckboxListTile(
+                    title: Text(
+                        'Surat Keterangan Domisili (Jika Alamat Sekarang Tidak Sesuai KTP)'),
+                    value: _submenu2Checked, // Status checkbox
+                    onChanged: (bool? value) {
+                      setState(() {
+                        _submenu2Checked = value!;
+                      });
+                    },
+                  ),
+                  CheckboxListTile(
+                    title: Text('SPT PPH 21 '),
+                    value: _submenu1Checked, // Status checkbox
+                    onChanged: (bool? value) {
+                      setState(() {
+                        _submenu1Checked = value!;
+                      });
+                    },
+                  ),
+                  CheckboxListTile(
+                    title: Text('Slip Gaji 3 Bulan Terakhir (Asli)'),
+                    value: _submenu2Checked, // Status checkbox
+                    onChanged: (bool? value) {
+                      setState(() {
+                        _submenu2Checked = value!;
+                      });
+                    },
+                  ),
+                  CheckboxListTile(
+                    title: Text('Fotokopi SK Pengangkatan (Legalisir)'),
+                    value: _submenu2Checked, // Status checkbox
+                    onChanged: (bool? value) {
+                      setState(() {
+                        _submenu2Checked = value!;
+                      });
+                    },
+                  ),
+                  CheckboxListTile(
+                    title: Text('Rekening Koran (Tabungan) 3 Bulan Terakhir'),
+                    value: _submenu2Checked, // Status checkbox
+                    onChanged: (bool? value) {
+                      setState(() {
+                        _submenu2Checked = value!;
+                      });
+                    },
+                  ),
+                  CheckboxListTile(
+                    title: Text('Fotokopi ID Card Jamsostek'),
+                    value: _submenu2Checked, // Status checkbox
+                    onChanged: (bool? value) {
+                      setState(() {
+                        _submenu2Checked = value!;
+                      });
+                    },
                   ),
                 ],
               ),
+
               ExpansionTile(
                 title: Text('Kartu Pembayaran'),
                 children: [
                   ElevatedButton(
-                      onPressed: () {}, child: Text('Lihat Kartu Pembayaran'))
+                      onPressed: () {
+                        Navigator.of(context).pushNamed('/paymentcard');
+                      },
+                      child: Text('Lihat Kartu Pembayaran'))
                 ],
               ),
               SizedBox(
@@ -237,6 +593,45 @@ class _BottomSheetMenuState extends State<BottomSheetMenu> {
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class StepProgress extends StatelessWidget {
+  final String stepText;
+  final int stepPercentage;
+
+  const StepProgress({
+    required this.stepText,
+    required this.stepPercentage,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 16),
+      child: Row(
+        children: [
+          Expanded(
+            flex: 3,
+            child: Text(
+              stepText,
+              style: TextStyle(fontSize: 15),
+            ),
+          ),
+          Expanded(
+            flex: 1,
+            child: Text(
+              '$stepPercentage%',
+              textAlign: TextAlign.right,
+              style: TextStyle(
+                fontSize: 15,
+                // fontWeight: FontWeight.bold
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

@@ -47,6 +47,7 @@ class MyApp extends StatelessWidget {
         formProspekCostumer.RouteName: (context) => formProspekCostumer(),
         // StatusReport.RouteName: (context) => StatusReport(),
         // PaymentProgress.RouteName: (context) => PaymentProgress(),
+        PaymentCard.RouteName: (context) => PaymentCard(),
         // CancelReport.RouteName: (context) => CancelReport(),
         PaymentProgress.RouteName: (context) => PaymentProgress(),
         // Arrears.RouteName: (context) => Arrears(),
