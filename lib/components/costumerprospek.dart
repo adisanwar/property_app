@@ -164,11 +164,10 @@ class _CostumerProspekState extends State<CostumerProspek> {
               // SizedBox(height: 10),
               if (_startDate != null && _endDate != null)
                 Text('Range Tanggal: $_startDate - $_endDate'),
-              ListView.builder(
+              ListView(
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
-                itemCount: 10,
-                itemBuilder: (BuildContext context, int index) {
+                children: List.generate(10, (index) {
                   return Card(
                     child: Container(
                       padding: const EdgeInsets.all(10.0),
@@ -190,8 +189,8 @@ class _CostumerProspekState extends State<CostumerProspek> {
                       ),
                     ),
                   );
-                },
-              ),
+                }),
+              )
             ],
           ),
         ),

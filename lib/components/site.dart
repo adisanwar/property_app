@@ -74,32 +74,42 @@ class _SiteState extends State<Site> {
                     setState(() {
                       selectedItem = value;
                       // Conditionally update the items of the second dropdown
-                      if (selectedItem == 'Grand Haikal') {
-                        Perumahan = GrandHaikalDropdownItems;
+                      switch (selectedItem) {
+                        case 'Grand Haikal':
+                          Perumahan = GrandHaikalDropdownItems;
+                          break;
+                        case 'Bumi Cibodas Indah':
+                          Perumahan = cibodas;
+                          break;
+                        case 'Graha Padjadjaran':
+                          Perumahan = padjadjaran;
+                          break;
+                        case 'Hayaty Residence':
+                          Perumahan = hayaty;
+                          break;
+                        case 'Mulqi Mansion 4':
+                          Perumahan = mulqi;
+                          break;
+                        default:
+                          Perumahan = [];
                       }
-                      if (selectedItem == 'Bumi Cibodas Indah') {
-                        Perumahan = cibodas;
-                      }
-                      if (selectedItem == 'Graha Padjadjaran') {
-                        Perumahan = padjadjaran;
-                      }
-                      if (selectedItem == 'Hayaty Residence') {
-                        Perumahan = hayaty;
-                      }
-                      if (selectedItem == 'Mulqi Mansion 4') {
-                        Perumahan = mulqi;
-                      }
+
+                      print('Perumahan yang dipilih: $Perumahan');
                     });
                   },
                 ),
                 const SizedBox(height: 16.0),
                 DropdownButtonFormField<String>(
+//                   There should be exactly one item with [DropdownButton]'s value: Graha Padjadjaran.
+// Either zero or 2 or more [DropdownMenuItem]s were detected with the same value
+// 'package:flutter/src/material/dropdown.dart':
+
                   decoration: const InputDecoration(
                     labelText: 'Pilih Gambar Site Plan',
                   ),
                   value: selectedSecondItem,
                   items: Perumahan.map((item) {
-                    return DropdownMenuItem(
+                    return DropdownMenuItem<String>(
                       value: item,
                       child: Text(item),
                     );
@@ -113,19 +123,45 @@ class _SiteState extends State<Site> {
                 const SizedBox(height: 16.0),
                 ElevatedButton(
                   onPressed: () {
-                    // if (selectedItem == 'Grand Haikal' &&
-                    //     GrandHaikalDropdownItems == 'Grand Haikal 1') {
-                    //   print('grand haikal ditekan');
-                    // } else if (selectedItem == 'Bumi Cibodas Indah') {
-                    //   // Handle logic specific to 'Bumi Cibodas Indah'
-                    // } else if (selectedItem == 'Graha Padjadjaran') {
-                    //   // Handle logic specific to 'Graha Padjadjaran'
-                    // } else if (selectedItem == 'Hayaty Residence') {
-                    //   // Handle logic specific to 'Hayaty Residence'
-                    // } else if (selectedItem == 'Mulqi Mansion 4') {
-                    //   // Handle logic specific to 'Mulqi Mansion 4'
-                    // }
-                    Navigator.of(context).pushNamed('/grandhaikal1');
+                    switch (selectedSecondItem) {
+                      case 'Grand Haikal 1':
+                        print('$selectedSecondItem ditekan');
+                        Navigator.of(context).pushNamed('/grandhaikal1');
+                        break;
+                      case 'Grand Haikal 2':
+                        print('$selectedSecondItem ditekan');
+                        // Navigator.of(context).pushNamed('/grandhaikal1');
+                        break;
+                      case 'Grand Haikal 3':
+                        print('$selectedSecondItem ditekan');
+                        // Navigator.of(context).pushNamed('/grandhaikal1');
+                        break;
+                      case 'Grand Haikal 4':
+                        print('$selectedSecondItem ditekan');
+                        // Navigator.of(context).pushNamed('/grandhaikal1');
+                        break;
+                      case 'Bumi Cibodas Indah':
+                        print('$selectedSecondItem ditekan');
+                        // Navigator.of(context).pushNamed('/grandhaikal1');
+                        break;
+                      case 'Graha Padjadjaran':
+                        print('$selectedSecondItem ditekan');
+                        // Navigator.of(context).pushNamed('/grandhaikal1');
+                        break;
+                      case 'Grand Haikal':
+                        print('$selectedSecondItem ditekan');
+                        // Navigator.of(context).pushNamed('/grandhaikal1');
+                        break;
+                      case 'Hayaty Residence':
+                        print('$selectedSecondItem ditekan');
+                        // Navigator.of(context).pushNamed('/grandhaikal1');
+                        break;
+                      case 'Mulqi Mansion 4':
+                        print('$selectedSecondItem ditekan');
+                        // Navigator.of(context).pushNamed('/grandhaikal1');
+                        break;
+                      default:
+                    }
                   },
                   child: const Text('Tampilkan'),
                 ),

@@ -24,7 +24,7 @@ class _FormReservState extends State<FormReserv> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Flutter'),
+          title: Text('Reserve Unit'),
           leading: IconButton(
             icon: Icon(Icons.arrow_back),
             onPressed: () {

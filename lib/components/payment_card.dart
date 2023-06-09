@@ -22,31 +22,19 @@ class PaymentCard extends StatelessWidget {
             Padding(
               padding: EdgeInsets.all(10),
               child: AspectRatio(
-                aspectRatio: 16 / 9,
+                aspectRatio: 9 / 16,
                 child: CardWidget(
                   title: 'Card 1',
                   description: 'This is the first card.',
+                  additionalText: 'Additional text below description.',
+                  rightTexts: [
+                    'Right Text 1',
+                    'Right Text 2',
+                    'Right Text 3',
+                  ],
+                  leftTexts: [' '],
                   backgroundColor: Colors.blue,
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.all(10),
-              child: AspectRatio(
-                aspectRatio: 16 / 9,
-                child: CardWidget(
-                  title: 'Card 1',
-                  description: 'This is the first card.',
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.all(10),
-              child: AspectRatio(
-                aspectRatio: 16 / 9,
-                child: CardWidget(
-                  title: 'Card 1',
-                  description: 'This is the first card.',
+                  textColor: Colors.white, // Mengatur warna teks menjadi putih
                 ),
               ),
             ),
@@ -60,12 +48,20 @@ class PaymentCard extends StatelessWidget {
 class CardWidget extends StatelessWidget {
   final String title;
   final String description;
-  final Color? backgroundColor; // Warna latar belakang
+  final String additionalText;
+  final List<String> rightTexts;
+  final List<String> leftTexts;
+  final Color backgroundColor; // Warna latar belakang
+  final Color textColor; // Warna teks
 
   CardWidget({
     required this.title,
     required this.description,
-    this.backgroundColor,
+    required this.additionalText,
+    required this.rightTexts,
+    required this.leftTexts,
+    required this.backgroundColor,
+    required this.textColor,
   });
 
   @override
@@ -73,23 +69,69 @@ class CardWidget extends StatelessWidget {
     return Card(
       elevation: 3,
       child: Container(
-        color:
-            backgroundColor, // Menggunakan warna latar belakang yang diberikan
+        color: backgroundColor,
+        // Menggunakan warna latar belakang yang diberikan
         padding: EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              title,
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  title,
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: textColor, // Mengatur warna teks
+                  ),
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: leftTexts
+                      .map(
+                        (text) => Text(
+                          text,
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: textColor, // Mengatur warna teks
+                          ),
+                        ),
+                      )
+                      .toList(),
+                ),
+              ],
             ),
             SizedBox(height: 10), // Spacer
             Text(
               description,
-              style: TextStyle(fontSize: 16),
+              style: TextStyle(
+                fontSize: 16,
+                color: textColor, // Mengatur warna teks
+              ),
+            ),
+            SizedBox(height: 10), // Spacer
+            Text(
+              additionalText,
+              style: TextStyle(
+                fontSize: 14,
+                color: textColor, // Mengatur warna teks
+              ),
+            ),
+            SizedBox(height: 10), // Spacer
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: rightTexts
+                  .map(
+                    (text) => Text(
+                      text,
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: textColor, // Mengatur warna teks
+                      ),
+                    ),
+                  )
+                  .toList(),
             ),
           ],
         ),

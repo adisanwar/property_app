@@ -47,7 +47,7 @@ class _ReserveUnitState extends State<ReserveUnit> {
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
       appBar: AppBar(
-        title: const Text("Prospek Konsumen"),
+        title: const Text("Reserve Unit"),
         actions: const [],
       ),
       body: SingleChildScrollView(
